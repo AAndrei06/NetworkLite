@@ -1,0 +1,77 @@
+{% extends "network/base.html" %}
+{% load static %}
+{% block content %}
+	<link rel="stylesheet" type="text/css" href="{% static 'network/settings.css' %}">
+	<main>
+		<div class="second-setting">
+			<form method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="first-gray">
+					<h4 class="section-name">Setări pentru profil</h4>
+				</div>
+				<div class="settings-space">
+					<div class = "input-element">
+						<p>Nume de utilizator:</p>
+						<input class = "input-first" type="text" value = "{{ user.username }}" maxlength="31" name="username-input-setting">
+					</div>
+					<div class = "input-element">
+						<p>Email:</p>
+						<input class = "input-first" type="email" value="{{ user.email }}" maxlength="200" name="email-input-setting">
+					</div>
+					<div class = "input-element">
+						<p>Ocupația/Hobby:</p>
+						{% if user.profile.job != "None" %}
+							<input class = "input-first" type="text" value="{{ user.profile.job }}" maxlength="20" name="job-input-setting">
+						{% else %}
+							<input class = "input-first" type="text" value="" maxlength="20" name="job-input-setting">
+						{% endif %}
+					</div>
+					<div class = "input-element">
+						<p>Locatia:</p>
+						{% if user.profile.location != "None" %}
+							<input class = "input-first" type="text" value="{{ user.profile.location }}" maxlength="20" name="location-input-setting">
+						{% else %}
+							<input class = "input-first" type="text" value="" maxlength="20" name="location-input-setting">
+						{% endif %}
+					</div>
+					<div class = "input-element">
+						<p>Date de contact:</p>
+						{% if user.profile.contact != "None" %}
+							<input class = "input-first" type="text" value = "{{ user.profile.contact }}" maxlength="100" name="contact-input-setting">
+						{% else %}
+							<input class = "input-first" type="text" value = "" maxlength="100" name="contact-input-setting">
+						{% endif %}
+					</div>
+					<div class="bio-area input-element">
+						<p>Biografie:</p>
+						{% if user.profile.bio != "None" %}
+							<textarea class = "setting-text" maxlength="500" rows="9" name="bio-text-info">{{ user.profile.bio }}</textarea>
+						{% else %}
+							<textarea class = "setting-text" maxlength="500" rows="9" name="bio-text-info"></textarea>
+						{% endif %}
+					</div>
+					<div class = "image-input">
+						<p>Fotografie pentru profil <small style="font-weight:200;">(de preferat o poză 1:1 )</small>:</p>
+						<input type="file" accept=".png, .jpg, .jfif, .gif, .jpeg," name="profile-image">
+					</div>
+					<div class = "image-input">
+						<p>Fotografie de fundal:</p>
+						<input type="file" accept=".png, .jpg, .jfif, .gif, .jpeg," name="profile-background-image">
+					</div>
+					
+				</div>
+				<div class = "buttons">
+					<a href = "/"><button class="cancel">Anulează</button></a>
+					<button type = "submit" class="save">Salvează</button>
+				</div>
+			</form>
+		</div>
+	</main>
+	<footer>
+		<div class = "copyrigth-msg">
+			<p>© 2023 NetworkLite</p>
+		</div>
+	</footer>
+	<script src="https://kit.fontawesome.com/8383e75d7d.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src = "{% static 'network/settings.js' %}"></script>
+{% endblock content %}

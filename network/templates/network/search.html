@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="{% static 'network/search.css' %}">
+		<title>Caută</title>
+	</head>
+	<div class = "input-search-user1">
+		<form method="POST" action="">
+			{% csrf_token %}
+			<div class="search-inputs-btn">
+				<input class = "input-text-user" placeholder = " Cauta un utilizator" type="text" name="user-input-search-text">
+				<button type = "submit" class = "search-button2">Cauta</button>
+			</div>
+		</form>
+	</div>
+	<main class = "user-results-container">
+		<div class = "no-results">
+			<h1><big>😔</big><br>Nu s-a găsit un rezultat</h1>
+		</div>
+		{% for user in users %}
+		<div class="user-result">
+			<div class="user-name">
+				<p>{{ user.username }}</p>
+			</div>
+			<a href="{% url 'profile' user.pk %}"><div class="user-picture">
+				<img src="{{ user.profile.profileimage.url }}">
+			</div></a>
+			<div class="user-profile-info">
+				{% if user.profile.job != "None" %}
+					<div class = "user-info-item">{{ user.profile.followers.count }} urmăritori</div>
+				{% else %}
+					<div class = "user-info-item"></div>
+				{% endif %}
+				<div class = "user-info-item">{{ user.profile.nr_of_posts }} postari</div>
+				
+				{% if user.profile.location != "None" %}
+					<div class = "user-info-item">{{ user.profile.location|default_if_none:"" }}</div>
+				{% else %}
+					<div class = "user-info-item"></div>
+				{% endif %}
+			</div>
+		</div>
+		{% endfor %}
+	</main>
+	<footer>
+		<div class = "copyrigth-msg">
+			<p>© 2023 NetworkLite</p>
+		</div>
+	</footer>
+	<script src="https://kit.fontawesome.com/8383e75d7d.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="{% static 'network/search.js' %}"></script>
+</body>
+</html>

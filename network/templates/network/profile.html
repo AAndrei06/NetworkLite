@@ -1,0 +1,117 @@
+{% extends "network/base.html" %}
+{% load static %}
+{% block content %}
+	<link rel="stylesheet" type="text/css" href="{% static 'network/profile.css' %}">
+	<main>
+		<div class = "big-picture" style = "background-image: url('{{ user_object.profile.background_image.url }}');">
+		</div>
+		<div class = "user-profile-picture-profile">
+			<img src="{{ user_object.profile.profileimage.url }}" width = "230" draggable="false">
+		</div>
+		<div class="name-info-profile">
+			<h1 class="name-user">{{ user_object.username }}</h1>
+			<p class = "job-name" style = "font-weight:bold;position:relative;top:0px">{{ user_object.profile.job }}</p>
+		</div>
+		{% if pk_user != user.pk %}
+			{% if user in user_object.profile.followers.all %}
+				<div class = "follow-area">
+					<a href = "/follow_user?user_id={{ user_object.pk }}"><button class = "follow-btn-user-profile">NU MAI URMĂRI</button></a>
+				</div>
+			{% else %}
+				<div class = "follow-area">
+					<a href = "/follow_user?user_id={{ user_object.pk }}"><button class = "follow-btn-user-profile">URMĂREȘTE</button></a>
+				</div>
+			{% endif %}
+		{% endif %}
+		<div class="container-for-content-profile">
+			<div class="information-section-user">
+				<div class = "title-of-information">
+					<h3>Despre</h3>
+				</div>
+				<div class="profile-information">
+					<div class="title-of-category">
+						<h4><i class="fa-solid fa-paper-plane"></i> Postări: {{ user_object.profile.nr_of_posts }}</h4>
+						<h4><i class="fa-solid fa-user-group"></i> Urmăritori: {{ user_object.profile.followers.all.count }}</h4>
+						
+					</div>
+				</div>
+				<div class="location-information">
+					<div class="title-of-category">
+						<h4><i class="fa-solid fa-location-dot"></i> Locația: </h4>
+						<p class = "much-content-new">{{ user_object.profile.location|default_if_none:"" }}</p>
+					</div>
+				</div>
+				<div class="contact-information">
+					<div class="title-of-category">
+						<h4><i class="fa-solid fa-phone"></i> Contacte: </h4>
+						<p class = "much-content-new">{{ user_object.profile.contact|default_if_none:"" }}</p>
+					</div>
+				</div>
+				<div class="job-information">
+					<div class="title-of-category">
+						<h4><i class="fa-solid fa-suitcase"></i> Ocupație: </h4>
+						<p class = "much-content-new">{{ user_object.profile.job|default_if_none:"" }}</p>
+					</div>
+				</div>
+				<div class="bio-information">
+					<div class="title-of-category">
+						<h4><i class="fa-solid fa-book"></i> Biografie: </h4>
+						<p class = "much-content-new">{{ user_object.profile.bio }}</p>
+					</div>
+				</div>
+			</div>
+			<div class = "container-for-posts">
+				{% for post in posts_by_user %}
+					<div class="post-item">
+						<div class = "user-top-bar">
+							<div class="user-image">
+								<img width = "40" height="40" src="{{ user_object.profile.profileimage.url }}">
+							</div>
+							<p class = "title-of-user">{{ post.author.username }}</p>
+							<p class = "date-posted-text">{{ post.date_posted|date:"F d, Y" }}</p>
+						</div>
+						<div class = "content-post">
+							{% if post.content %}
+								<div class="text-post">
+									<p>{{ post.content }}</p>
+								</div>
+							{% endif %}
+							{% if post.image %}
+								<div class = "image-block">
+									<img src="{{ post.image.url }}">
+								</div>
+							{% endif %}
+						</div>
+						<div class="bottom-bar">
+							{% if user not in post.likes.all %}
+								<a href="/like_post?post_id={{post.post_id}}">
+									<i class="fa-solid fa-thumbs-up like-space" style="color:white;"></i>
+									<div class="like-button icon-btn">
+										<i class="fa-solid fa-thumbs-up" style="color:#151542"></i>
+									</div>
+								</a>
+							{% else %}
+								<a href="/like_post?post_id={{post.post_id}}">
+									<i class="fa-solid fa-thumbs-up like-space" style="color:#151542;"></i>
+									<div class="like-button icon-btn">
+										<i class="fa-solid fa-thumbs-up" style="color:#151542;"></i>
+									</div>
+								</a>
+							{% endif %}
+							<div class="comment-button icon-btn">
+								<a style = "color:black" href="{% url 'comment' post.post_id %}"><i class="fa-solid fa-message" style="color:#151542"></i>
+								
+							</div>
+							<div class="inspect-button icon-btn">
+								<a style = "color:black;" href = "{% url 'post_detail' post.post_id %}"><i class="fa-solid fa-magnifying-glass-arrow-right" style="color:#151542"></i></a>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</main>
+	<script src="https://kit.fontawesome.com/8383e75d7d.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+	<script type="text/javascript" src = "{% static 'network/profile.js' %}"></script>
+{% endblock content %}

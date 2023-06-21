@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Autentificare</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'network/login.css' %}">
+	</head>
+	<body style = "background-image:url('{% get_media_prefix %}/photos/mountains.png');">
+		<div class = "card-register">
+			{% for message in messages %}
+				<div class = "register-errors">
+					<p class = "error-text">{{ message }}</p>
+				</div>
+			{% endfor %}
+			<form method="POST" action = "">
+				{% csrf_token %}
+				<div class = "inputs">
+					<div class = "info-register">
+						<h2>Autentifică-te</h2>
+						<hr id = "line-hr">
+					</div>
+					<br id = "line-hr">
+					<div class = "form-space-total">
+						<div class = "form-space">
+							<p>Nume de utilizator</p>
+							<i class="fa-regular fa-user icon-class"></i><input class = "input-field" requierd type="text" maxlength="100" name="username-input-login">
+						</div>
+						<div class = "form-space">
+							<p>Parola</p>
+							<i class="fa-solid fa-lock icon-class"></i><input class = "input-field" maxlength="100" type="password" name="password-input-login">
+						</div>
+					</div>
+					<button class = "submit-button" type="submit" value="submit">Autentifică-te</button>
+				</div>
+			</form>
+			<div class = "login-redirect">
+				<p class = "paragraph">Nu ai un cont? <a href="{% url 'register' %}">Înregistrează-te</a></p>
+			</div>
+		</div>
+		<div class = "copyrigth-msg">
+			<p>© 2023 NetworkLite</p>
+		</div>
+		<script src="https://kit.fontawesome.com/8383e75d7d.js" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="{% static 'network/login.js' %}"></script>
+	</body>
+</html>

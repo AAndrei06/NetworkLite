@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="{% static 'network/confirm_delete.css' %}">
+		<title>Confirmă Ștergerea</title>
+	</head>
+	<body>
+		<div class = "container-delete">
+			<div class="first-words">
+				<h1>Ești sigur că vrei să ștergi această postare?</h1>
+			</div>
+			<div class = "second-words">
+				<div class="atention"><i class="fa-solid fa-triangle-exclamation"></i><h3>Atenție!</h3></div>
+				<p>Această postare va fi ștearsă permanent și nu o vei putea recupera!</p>
+			</div>
+			<div class="buttons-list">
+				<a href = "{% url 'post_detail' post.post_id %}"><button class = "cancel-deletion">Anulează</button></a>
+					<form method="POST" action="">
+						{% csrf_token %}
+						<button class = "final-delete">Șterge</button>
+					</form>
+				</div>
+				
+			</div>
+			<script src="https://kit.fontawesome.com/8383e75d7d.js" crossorigin="anonymous"></script>
+		</body>
+	</html>

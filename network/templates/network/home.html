@@ -1,0 +1,167 @@
+{% extends "network/base.html" %}
+{% load static %}
+{% block content %}
+	<link rel="stylesheet" type="text/css" href="{% static 'network/home.css' %}">
+	<main class = "content-container">
+		<div class="left-section">
+			<div class="profile-info-section">
+				<div class = "profile-picture-home">
+					<img draggable = "false" src="{{ user.profile.profileimage.url }}">
+				</div>
+				<div class="profile-name-job">
+					<p>{{ user.username }}</p>
+					{% if user.profile.job != "None" %}
+						<p>{{ user.profile.job|default_if_none:"" }}</p>
+					{% else %}
+						<p> </p>
+					{% endif %}
+				</div>
+			</div>
+			<div class="link-section">
+				<div class="link-item"><a href = "{% url 'profile' user.pk %}"><p>&nbsp &nbsp<i class="fa-regular fa-user"></i>&nbspProfil</p></a></div>
+				<div class="link-item"><a href = "{% url 'create_post' %}"><p>&nbsp &nbsp<i class="fa-regular fa-image"></i>&nbspCreează o postare</p></a></div>
+				<div class="link-item"><a href = "{% url 'about' %}"><p>&nbsp &nbsp<i class="fa-regular fa-address-card"></i>&nbspDespre</p></a></div>
+				<div class="link-item"><a href = "{% url 'contact' %}"><p>&nbsp &nbsp<i class="fa-solid fa-phone-volume"></i>&nbsp Contacte</p></a></div>
+				<div class="link-item"><a href = "{% url 'settings' %}"><p>&nbsp &nbsp<i class="fa-solid fa-gear"></i>&nbspSetări</p></a></div>
+				<div class="link-item"><a href = "{% url 'logout' %}"><p>&nbsp &nbsp<i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp Logout</p></a></div>
+			</div>
+		</div>
+		<div class="middle-section">
+			<!-- Swiper Begin -->
+			<div class="recommended-users-block">
+				<p class = "text-post-ask">S-ar putea sa ii cunosti</p>
+				<div class = "container-swipe">
+					<div class="swiper mySwiper">
+						<div class="swiper-wrapper">
+							{% for recommended_user in recommended_users %}
+								<div class="swiper-slide">
+									<div class="swiper-photo-item">
+										<a href = "{% url 'profile' recommended_user.pk %}"><img src="{{ recommended_user.profile.profileimage.url }}"></a>
+									</div>
+									<div class = "info-swiper-element">
+										<p>{{ recommended_user.username }}</p>
+									</div>
+								</div>
+							{% endfor %}
+							
+						</div>
+						<div class="swiper-button-next"></div>
+						<div class="swiper-button-prev"></div>
+						<div class="swiper-pagination"></div>
+					</div>
+				</div>
+			</div>
+			<!-- End Swiper -->
+			<div class = "container-for-posts">
+				{% for post in posts %}
+					<div class="post-item">
+						<div class = "user-top-bar">
+							<div class="user-image">
+								<a href = "{% url 'profile' post.author.pk %}"><img src="{{ post.author.profile.profileimage.url }}"></a>
+							</div>
+							<p class = "title-of-user">{{ post.author.username }}</p>
+							<p class = "date-posted-text">{{ post.date_posted|date:"F d, Y" }}</p>
+						</div>
+						<div class = "content-post">
+							<div class="text-post">
+								{% if post.content %}
+									<p>{{ post.content }}</p>
+								{% endif %}
+							</div>
+							<div class = "image-block">
+								{% if post.image %}
+									<img src="{{ post.image.url }}">
+								{% endif %}
+							</div>
+						</div>
+						<div class="bottom-bar">
+							{% if user not in post.likes.all %}
+								<a href="/like_post?post_id={{post.post_id}}">
+									<i class="fa-solid fa-thumbs-up like-space" style="color:white;"></i>
+									<div class="like-button icon-btn">
+										<i class="fa-solid fa-thumbs-up" style="color:#151542"></i>
+									</div>
+								</a>
+							{% else %}
+								<a href="/like_post?post_id={{post.post_id}}">
+									<i class="fa-solid fa-thumbs-up like-space" style="color:#151542;"></i>
+									<div class="like-button icon-btn">
+										<i class="fa-solid fa-thumbs-up" style="color:#151542;"></i>
+									</div>
+								</a>
+							{% endif %}
+							<div class="comment-button icon-btn">
+								<a target = "_blank" style = "color:black" href="{% url 'comment' post.post_id %}"><i class="fa-solid fa-message" style="color:#151542"></i>
+									
+								</div>
+								<div class="inspect-button icon-btn">
+									<a style = "color:black;" href = "{% url 'post_detail' post.post_id %}"><i class="fa-solid fa-magnifying-glass-arrow-right" style="color:#151542"></i></a>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+			<div class="right-section">
+				<div class="section-title">
+					<p>Noutăți</p>
+				</div>
+				<div class="section-content-news">
+					<div class="news-item">
+						<div class="news-photo-item">
+							<img src="{% get_media_prefix %}/photos/news1.png">
+						</div>
+						<div class="news-content">
+							<p><a target = "_blank" href = "https://www.unicef.org/partnerships/lego-foundation-donates-7m-ukrainian-refugee-children">Fundația Lego donează 7 milione de dolari pentru copii refugiați din Ucraina.
+							</a></p>
+						</div>
+					</div>
+					<div class="news-item">
+						<div class="news-photo-item">
+							<img src="{% get_media_prefix %}/photos/news2.png">
+						</div>
+						<div class="news-content">
+							<p><a target = "_blank" href = "https://www.reuters.com/technology/openai-ceo-sees-huge-israeli-role-reducing-risks-technology-2023-06-05/">Directorul OpenAi a prezis un mare rol pentru Israel in reducerea riscurilor Inteligenței Artificiale
+							</a></p>
+						</div>
+					</div>
+					<div class="news-item">
+						<div class="news-photo-item">
+							<img src="{% get_media_prefix %}/photos/news3.png">
+						</div>
+						<div class="news-content">
+							<p><a target = "_blank" href = "https://apnews.com/article/apple-headset-googles-virtual-augmented-reality-technology-dc524172ada659536dbeed5f5efb11fa">Apple lansează un nou set de căști care îi va duce pe utilizatori între lumea virtuală și cea reală
+							</a></p>
+						</div>
+					</div>
+					<div class="news-item">
+						<div class="news-photo-item">
+							<img src="{% get_media_prefix %}/photos/news4.png">
+						</div>
+						<div class="news-content">
+							<p><a target="_blank" href = "https://www.bbc.com/news/business-65532128">Care sunt trucurile care fac calculatoarele să afișeze jocurile video foarte real?
+							</a></p>
+						</div>
+					</div>
+					<div class="news-item">
+						<div class="news-photo-item">
+							<img src="{% get_media_prefix %}/photos/news5.png">
+						</div>
+						<div class="news-content">
+							<p><a target = "_blank" href="https://www.searchenginejournal.com/social-media-gen-z/485152/">Cum generația Z folosește rețelele de socializare
+							</a></p>
+						</div>
+					</div>
+					<div class="news-item">
+						<div class="news-photo-item">
+							<img src="{% get_media_prefix %}/photos/news6.png">
+						</div>
+						<div class="news-content">
+							<p><a href = "https://www.aljazeera.com/economy/2023/6/5/us-sec-sues-worlds-largest-crypto-exchange-binance-and-founder">Comisia pentru Bursa și Valori Mobiliare din SUA dă în judecată Binance și directorul companiei</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</main>
+		<script type="text/javascript" src="{% static 'network/home.js' %}"></script>
+	{% endblock content %}

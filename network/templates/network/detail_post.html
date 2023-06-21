@@ -1,0 +1,53 @@
+{% extends "network/base.html" %}
+{% load static %}
+{% block content %}
+<body>
+	<link rel="stylesheet" type="text/css" href="{% static 'network/detail_post.css' %}">
+	<div class = "container-for-posts">
+		<div class="post-item">
+			<div class = "user-top-bar">
+				<div class="user-image">
+					<img draggable = "false" src="{{ post.author.profile.profileimage.url }}">
+				</div>
+				<p class = "title-of-user">{{ post.author.username }}</p>
+				<p class = "date-posted-text">{{ post.date_posted|date:"F d, Y" }}</p>
+			</div>
+			<div class = "content-post">
+				{% if post.content %}
+					<div class="text-post">
+						<p>{{ post.content }}</p>
+					</div>
+				{% endif %}
+				{% if post.image %}
+					<div class = "image-block">
+						<img src="{{ post.image.url }}">
+					</div>
+				{% endif %}
+			</div>
+			<div class="bottom-bar">
+				<div>
+					<div class="like-button icon-btn">
+						<i class="fa-solid fa-thumbs-up"></i><p><span class = "like-span">Aprecieri:</span> {{ post.number_of_likes }}</p>
+					</div>
+					<div class="comment-button icon-btn">
+						<i class="fa-solid fa-message"></i><p><span class = "comm-span">Comentarii:</span> {{ post.nr_of_comments }}</p>
+					</div>
+				</div>
+				{% if post.author == user %}
+					<div class="buttons-for-post">
+						<div>
+							<a href = "{% url 'confirm_delete' post.post_id %}"><button class = "cancel-btn-post">Șterge</button></a>
+						</div>
+						<div>
+							<a href = "{% url 'post_update' post.post_id %}"><button class="update-btn-post">Editează</button></a>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+		
+	</div>
+	<script src="https://kit.fontawesome.com/8383e75d7d.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src = "{% static 'network/detail_post.js' %}"></script>
+</body>
+{% endblock content %}

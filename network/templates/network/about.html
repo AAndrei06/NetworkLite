@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{% static 'network/about.css' %}">
+	<title>Despre Noi</title>
+</head>
+<body>
+	<div class="top-title-about">
+		<h1>Despre Noi</h1>
+	</div>
+	<div class="about-page-picture">
+		<img draggable = "false" width="900" src="{% get_media_prefix %}/photos/about-pic.png">
+	</div>
+	<div class="text-about-page">
+		<p>NetworkLite este o rețea de socializare creată de Arseni Andrei.Această rețea de socializare permite utilizatorilor să comunice
+			cu prietenii lor pe care îi pot urmări,să creeze postări și să le susțină cu un like sau comentariu,această platformă este foarte
+			ușor de folosit și flexibilă,utilizatorul având posibilitatea de a schimba informația contului său dar și al înfrumuseța cu fotografiile sale
+			preferate,acesta poate să schimbe conținutul postărilor și al comentariilor sau chiar să le șteargă.Rețeaua de socializare are și o secțiune 
+			de știri unde puteți vedea cele mai noi știri din diferite domenii.Platforma este încă în dezvoltare :)</p>
+	</div>
+	<a href="{% url 'home' %}"><button class = "home-button-about">ACASĂ</button></a>
+	<div class = "copyrigth-msg">
+		<p>© 2023 NetworkLite</p>
+	</div>
+
+</body>
+</html>

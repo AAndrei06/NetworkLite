@@ -1,0 +1,59 @@
+{% extends "network/base.html" %}
+{% load static %}
+{% block content %}
+	<link rel="stylesheet" type="text/css" href="{% static 'network/create_post.css' %}">
+	<main class = "post-create-form-container">
+		<form method = "POST" action="" enctype="multipart/form-data">
+			{% csrf_token %}
+			{% if post %}
+				<div class="post-create-space">
+					<div class="input-item-post">
+						<p>Introdu conținutul:</p>
+						<textarea class = "text-area-post" name = "post-content-input" maxlength="1500">{{ post.content }}</textarea>
+					</div>
+					<div class="input-item-post2">
+						<p>Introdu o fotografie:</p>
+						<input type="file" name="post-photo-input">
+					</div>
+					<div class="input-item-post2 input-check">
+						<p>Pastrează fotografia:</p>
+						<input type="checkbox" value="true" name="keep-photo">
+					</div>
+					<div class="post-create-buttons">
+						<div class="cancel-button-post">
+							<a href = "url 'home'"><button class = "cancel-btn">Anulează</button></a>
+						</div>
+						<div class="save-button-post">
+							<button type = "submit" class = "post-btn">Postează</button>
+						</div>
+					</div>
+				</div>
+			{% else %}
+				<div class="post-create-space">
+					<div class="input-item-post">
+						<p>Introdu conținutul:</p>
+						<textarea class = "text-area-post" name = "post-content-input" maxlength="1500"></textarea>
+					</div>
+					<div class="input-item-post2">
+						<p>Introdu o fotografie:</p>
+						<input type="file" name="post-photo-input">
+					</div>
+					<div class="post-create-buttons">
+						<div class="cancel-button-post">
+							<a href = "url 'home'"><button class = "cancel-btn">Anulează</button></a>
+						</div>
+						<div class="save-button-post">
+							<button type = "submit" class = "post-btn">Postează</button>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+		</form>
+	</main>
+	<footer>
+		<div class = "copyrigth-msg">
+			<p>© 2023 NetworkLite</p>
+		</div>
+	</footer>
+	<script type="text/javascript" src="{% static 'network/create_post.js' %}"></script>
+{% endblock content %}

@@ -1,0 +1,50 @@
+{% extends "network/base.html" %}
+{% load static %}
+{% block content %}
+	<div class = "container-contact">
+		<link rel="stylesheet" type="text/css" href="{% static 'network/contact.css' %}">
+		<script type="text/javascript"
+		src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+		</script>
+		<script type="text/javascript">
+		(function(){
+		emailjs.init("qwM7CxJ6-sge3zJxy");
+		})();
+		</script>
+		<div class="contact-form">
+			<div class="text-first">
+				<h1 class = "first-text">Ne poți întreba ceva aici</h1>
+			</div>
+			<div class="title-for-form">
+				<div class="input-field-contact">
+					<p class="title-input">Numele și Prenumele:</p>
+					<input id = "user-input-id" class = "user-input" type="text" name="username-input-contact"/>
+				</div>
+				<div class="input-field-contact">
+					<p class="title-input">Adresa Electronică:</p>
+					<input id = "email-input-id"class = "user-input" type="email" name="username-input-contact">
+				</div>
+				<p class="title-input">Mesajul:</p>
+				<br>
+				<textarea id = "msg-input-id" class="text-area-contact"></textarea>
+			</div>
+			<div class="container-for-button">
+				<button id="btnButton">
+				<p id="btnText">Trimite</p>
+				<div class="check-box">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="11 10 30 30">
+						<path fill="transparent" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+					</svg>
+				</div>
+				</button>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<div class = "copyrigth-msg">
+			<p>© 2023 NetworkLite</p>
+		</div>
+	</footer>
+	<script src="https://kit.fontawesome.com/8383e75d7d.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="{% static 'network/contact.js' %}"></script>
+{% endblock content %}

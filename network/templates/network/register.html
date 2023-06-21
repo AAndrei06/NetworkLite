@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Înregistrare</title>
+		
+		<link rel="stylesheet" type="text/css" href="{% static 'network/register.css' %}">
+	</head>
+	<body style="background-image: url('{% get_media_prefix %}/photos/mountains.png');">
+		<div class = "card-register">
+			{% for message in messages %}
+			<div class = "register-errors">
+				<p class = "error-text">{{ message }}</p>
+			</div>
+			{% endfor %}
+			<form method="POST" action="">
+				{% csrf_token %}
+				<div class = "inputs">
+					<div class = "info-register">
+						<h2>Înregistrează-te</h2>
+						<hr id = "line-hr">
+					</div>
+					<br id = "line-hr">
+					<div class = "form-space-total">
+						<div class = "form-space">
+							<p>Nume de utilizator</p>
+							<i class="fa-regular fa-user icon-class"></i><input class = "input-field" requierd maxlength="100" type="text" name="username-input">
+						</div>
+						<div class = "form-space">
+							<p>Email</p>
+							<i class="fa-regular fa-envelope icon-class"></i><input class = "input-field" maxlength="100" type="email" name="email-input">
+						</div>
+						<div class = "form-space">
+							<p>Parola</p>
+							<i class="fa-solid fa-lock icon-class"></i><input class = "input-field" maxlength="100" type="password" name="password-input">
+						</div>
+						<div class = "form-space">
+							<p>Confirmă parola</p>
+							<i class="fa-solid fa-unlock icon-class"></i><input class = "input-field" maxlength="100" type="password" name="password-input-verify">
+						</div>
+					</div>
+					<button class = "submit-button" type="submit" value="submit">Înregistrează-te</button>
+				</div>
+			</form>
+			<div class = "login-redirect">
+				<p class = "paragraph">Deja ai un cont? <a href="{% url 'login' %}">Autentifică-te</a></p>
+			</div>
+		</div>
+		<div class = "copyrigth-msg">
+			<p>© 2023 NetworkLite</p>
+		</div>
+		<script type="text/javascript" src="{% static 'network/register.js' %}"></script>
+		<script src="https://kit.fontawesome.com/8383e75d7d.js" crossorigin="anonymous"></script>
+	</body>
+</html>

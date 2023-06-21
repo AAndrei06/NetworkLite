@@ -1,0 +1,197 @@
+
+@media all and (max-width: 14120px){
+
+	.logo{
+		display: none;
+		top:12px;
+
+	}
+
+	.menu-option{
+		display: inline-block;
+	}
+
+	.search-div{
+		margin-left: 20px;
+	}
+
+}
+.container-contact{
+	margin-top: 120px;
+	width:100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.contact-form{
+	border: solid;
+	display: inline-block;
+	width:500px;
+	height: 800px;
+	border:none;
+	border-radius: 10px;
+	background-color: white;
+	box-shadow: 0px 0px 10px gray;
+}
+
+.user-input{
+	width:90%;
+	height: 30px;
+	margin-left: 5%;
+	border: none;
+	background-color: #fff;
+	border-bottom: solid;
+	border-bottom-color: gray;
+	border-bottom-width: 2px;
+	outline: 0;
+	font-size: 16px;
+}
+
+.text-area-contact{
+	margin-left: 5%;
+	width:90%;
+	height: 250px;
+	resize: none;
+	font-size: 16px;
+	font-family: Arial;
+	outline: 0;
+}
+
+.copyrigth-msg{
+	margin-top:100px;
+	display: inline-block;
+	margin-left: auto;
+	margin-right: auto;
+	width:100%;
+	text-align: center;
+}
+
+.input-field-contact{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.title-input{
+	margin-left: 5%;
+}
+
+.text-first{
+	margin-left: 5%;
+	margin-top: 20px;
+}
+
+/* Button */
+
+
+
+.container-for-button{
+	width:100%;
+	height: auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	margin-top: 50px;
+}
+
+#btnButton{
+    width: 170px;
+    height: 70px;
+    border: none;
+    outline: none;
+    background: #1d8bf9;
+    color: #fff;
+    font-size: 22px;
+    border-radius: 40px;
+    text-align: center;
+    box-shadow: 0 6px 20px -5px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    position: absolute;
+    margin-left: auto;
+}
+
+#btnButton p{
+    font-weight: bold;
+}
+
+.check-box{
+    width: 70px;
+    height: 70px;
+    border-radius: 40px;
+    box-shadow: 0 0 12px -2px rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0px;
+    right: -40px;
+    opacity: 0;
+}
+
+.check-box svg{
+    width: 40px;
+    margin: 10px;
+}
+
+
+svg path{
+    stroke-width: 5;
+    stroke: #fff;
+    stroke-dasharray: 34;
+    stroke-dashoffset: 34;
+    stroke-linecap: round;
+}
+
+.active{
+	background: #1d8bf9;
+    transition: 1s;
+}
+
+.active .check-box{
+    right: 0;
+    opacity: 1;
+    transition: 1s;
+}
+
+.active p{
+    margin-right: 105px;
+    transition: 1s;
+}
+
+.active svg path{
+    stroke-dashoffset: 0;
+    transition: 1s;
+    transition-delay: 1s;
+}
+
+
+
+/* Button */
+
+@media all and (max-width:550px){
+	.contact-form{
+		width:400px;
+	}
+}
+
+@media all and (max-width:430px){
+	.contact-form{
+		width:300px;
+	}
+
+	.text-first{
+		font-size: 12px;
+	}
+}
+
+@media all and (max-width:320px){
+	.contact-form{
+		width:250px;
+	}
+
+	.text-first{
+		font-size: 10px;
+	}
+}

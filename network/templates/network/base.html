@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+		<link rel="stylesheet" type="text/css" href="{% static 'network/general.css' %}">
+		{% if title %}
+			<title>{{ title }}</title>
+		{% endif %}
+	</head>
+	<body>
+		<div id = "show-menu-info" class = "menu-slide-area">
+			<i class="fa-solid fa-xmark" onclick="menuSlideShow()"></i>
+			<a href="{% url 'home' %}" style="color:black;text-decoration: none;"><div class="profile-info-menu">
+				<div class = "profile-picture-home">
+					<img draggable = "false" src="{{ user.profile.profileimage.url }}">
+				</div>
+				<div class="profile-name-job">
+					<p>{{ user.username }}</p>
+					<p>{{ user.profile.job|default_if_none:"" }}</p>
+				</div>
+			</div></a>
+			<div class="link-items-menu">
+				<div class="link-item-menu"><a href = "{% url 'profile' user.pk %}"><p>&nbsp &nbsp<i class="fa-regular fa-user"></i>&nbspProfil</p></a></div>
+				<div class="link-item-menu"><a href = "{% url 'create_post' %}"><p>&nbsp &nbsp<i class="fa-regular fa-image"></i>&nbspCreează o postare</p></a></div>
+				<div class="link-item-menu"><a href = "{% url 'about' %}"><p>&nbsp &nbsp<i class="fa-regular fa-address-card"></i>&nbspDespre</p></a></div>
+				<div class="link-item-menu"><a href = "{% url 'contact' %}"><p>&nbsp &nbsp<i class="menu-side-icons fa-solid fa-phone-volume"></i>&nbsp Contacte</p></a></div>
+				<div class="link-item-menu"><a href = "{% url 'settings' %}"><p>&nbsp &nbsp<i class="menu-side-icons fa-solid fa-gear"></i>&nbspSetări</p></a></div>
+				<div class="link-item-menu"><a href = "{% url 'logout' %}"><p>&nbsp &nbsp<i class="menu-side-icons fa-solid fa-arrow-right-from-bracket"></i>&nbsp Logout</p></a></div>
+			</div>
+		</div>
+		<header>
+			<div class = "banner">
+				<div class="menu-option">
+					<i class="fa-solid fa-bars" onclick="menuSlideShow()"></i>
+				</div>
+				<div class="logo">
+					<img width = "60" src="{% get_media_prefix %}/photos/logo.png" draggable="false">
+				</div>
+				<div class="search-div">
+					<a target = "_blank" href = "{% url 'search' %}"><button class = "home-search-user-btn">🔍 Cauta Utilizatori</button></a>
+				</div>
+				<a href="{% url 'profile' user.pk %}" style="color:#151542;"><div class = "profile-picture-banner">
+					<img width = "45" src="{{ user.profile.profileimage.url }}" draggable="false">
+				</div></a>
+			</div>
+		</header>
+		<script src="https://kit.fontawesome.com/8383e75d7d.js" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+		{% block content %}
+		
+		{% endblock content %}
+	</body>
+</html>

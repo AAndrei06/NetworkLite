@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="{% static 'network/comments.css' %}">
+		<title>Comentarii</title>
+	</head>
+	<body>
+
+		<main class = "comments-container">
+			{% for comment in comments %}
+				<div class = "comment-object">
+					<div class="user-top">
+						<div class="user-picture-comment">
+							<img src="{{ comment.author.profile.profileimage.url }}">
+						</div>
+						<div class="user-name-comment">
+							<p>{{ comment.author.username }}</p>
+						</div>
+					</div>
+					<div class="comment-content">
+						<p>{{ comment.text }}</p>
+					</div>
+					{% if user == comment.author %}
+						<div class = "user-bottom-bar-comment">
+							<div class="comment-btns">
+								<a href = "{% url 'delete_comment' comment.comment_id %}"><button class = "comment-delete">Șterge</button></a>
+								<a href = "{% url 'edit_comment' comment.comment_id %}"><button class = "comment-edit">Editează</button></a>
+							</div>
+						</div>
+					{% endif %}
+				</div>
+				
+			{% endfor %}
+		</main>
+		<div class="write-comment">
+			{% if comment_object %}
+				<form method="POST" action="">
+					{% csrf_token %}
+					<div class="input-object-comment">
+						<input name = "comment-field-input-edit" value = "{{ comment_object.text }}" placeholder = "Scrie un comentariu" class = "input-comment-field" type="text">
+						<button class = "button-post-comment" type = "submit"><i class="fa-regular fa-paper-plane"></i></button>
+					</div>
+				</form>
+			{% else %}
+				<form method="POST" action="">
+					{% csrf_token %}
+					<div class="input-object-comment">
+						<input name = "comment-field-input" placeholder = "Scrie un comentariu" class = "input-comment-field" type="text">
+						<button class = "button-post-comment" type = "submit"><i class="fa-regular fa-paper-plane"></i></button>
+					</div>
+				</form>
+			{% endif %}
+		</div>
+		<script src="https://kit.fontawesome.com/8383e75d7d.js" crossorigin="anonymous"></script>
+	</body>
+</html>
