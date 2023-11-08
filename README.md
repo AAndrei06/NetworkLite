@@ -1,2 +1,2 @@
 # NetworkLite
-Social media app made in Django framework
+Social media app made with Django Framework in Python
